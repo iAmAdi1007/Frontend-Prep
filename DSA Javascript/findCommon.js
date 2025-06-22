@@ -1,4 +1,4 @@
-// Given 3 sorted arrays, find the common elements in them.
+/** Q. Given 3 sorted arrays, find the common elements in them. */
 // Example: [1, 5, 10, 20, 40, 80], [6, 7, 20, 80, 100], [3, 4, 15, 20, 30, 70, 80, 120] => [20, 80]
 
 function findSmallestAmong(element1,element2, element3){

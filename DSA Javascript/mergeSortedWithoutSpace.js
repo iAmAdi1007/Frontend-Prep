@@ -1,3 +1,4 @@
+/** Q. Given 2 arrays in ascending order, return sorted array without using extra space */
 var merge = function(nums1, m, nums2, n) {
     let i = m + n - 1, j = 0;
     while(nums1[i] < nums2[j]){

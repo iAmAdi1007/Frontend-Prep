@@ -1,5 +1,4 @@
-/**
- Do not return anything, modify nums1 in-place instead.
+/** Q. Given 2 arrays in ascending order, return sorted array.
  */
  function merge(nums1, m, nums2, n) {
     let i = 0, j = 0, index = 0;

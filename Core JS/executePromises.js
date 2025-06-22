@@ -16,31 +16,42 @@ const promiseArray = [
     promiseCreator(2),
 ];
 
+/** Method 1: Using Array.reduce */
+
 const executePromises = async(promiseArray) => {
     promiseArray.reduce((previousVal, currEle) => {
         return previousVal.then(() => {
             return currEle.then((val) => {
-                console.log(`Resolved Promise with Time ${val}`)
+                console.log(`Resolved Promise with Time from Array Reduce ${val}`)
             })
         })
     }, Promise.resolve())
 }
 
-// executePromises(promiseArray);
+/** Method 2: Using async await syntactic sugar */
 
-/* Execute Promises in Parallel */
-
-const executePromisesParallel = (promiseArray, callback) => {
-    let resolvedPromiseCount = 0;
-    promiseArray.forEach(promise => {
-        promise.then(val => {
-            console.log(`Resolved Promise with Time ${val}`)
-            resolvedPromiseCount += 1;
-            if(resolvedPromiseCount === promiseArray){
-                callback();
-            }
-        })
-    })
+const executeUsingAsyncAwait = async(promiseArray) => {
+    for(let promise of promiseArray){
+        try{
+            const res = await promise;
+            console.log(`Resolved Promise with Time from async-await ${res}`);
+        }catch(err){
+            console.log(err);
+        }
+    }
 }
 
-// executePromisesParallel(promiseArray, () => {});
+/** Method 3: Using Recursion */
+
+const executeSeriesRecusively =  (promiseArray,  index) => {
+    if(index < promiseArray.length){
+        promiseArray[index].then(val => {
+            console.log(`Resolved Promise with Time using recursion ${val}`);
+            executeSeriesRecusively(promiseArray, index + 1);
+        })
+    }
+}
+
+executePromises(promiseArray);
+executeUsingAsyncAwait(promiseArray);
+executeSeriesRecusively(promiseArray, 0);

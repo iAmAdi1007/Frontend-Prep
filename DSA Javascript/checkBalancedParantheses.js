@@ -1,3 +1,5 @@
+/** Q. Write the algorithm to Check Balanced Parantheses */
+
 function Stack() {
   this.top = -1;
   this.items = [];

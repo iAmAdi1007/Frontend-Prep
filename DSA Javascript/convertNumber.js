@@ -1,3 +1,4 @@
+/** Q. Covert to binary, octal or hexa */
 function baseConverter(num, base){
     const str = '0123456789ABCDEF';
     let result = '';

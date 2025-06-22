@@ -1,4 +1,4 @@
-/**
+/** Q. Remove all occurences of element from the array.
  * @param {number[]} nums
  * @param {number} val
  * @return {number}

@@ -1,4 +1,4 @@
-/* Check if unique pair exists */
+/* Q. Check if unique pair of elements with add up to give the sum exists */
 
 // Approach 1 : Naive Brute Force
 

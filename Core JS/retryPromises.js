@@ -1,3 +1,5 @@
+/** Problem Statement: Implement a function in javascript that retries promises N number of times with a delay between each call */
+
 function delayPromise(delay) {
   return new Promise((res, rej) => {
     setTimeout(() => {
