@@ -47,3 +47,42 @@ subscriber.subscribe(click);
 subscriber.subscribe(move);
 
 subscriber.fire('#event 3');
+
+console.log("*********************** ES6 Class Implementation ****************")
+
+class ObserverClass{
+    #handlers = null;
+    constructor(){
+        this.#handlers = []
+    }
+
+    subscribe(fn){
+        this.#handlers.push(fn)
+    }
+
+    unsubscribe(fn){
+        this.#handlers = this.#handlers.filter(el => el !== fn);
+    }
+
+    fire(event){
+        this.#handlers.forEach(handler => {
+            handler(event);
+        })
+    }
+}
+
+
+const sub = new ObserverClass();
+
+sub.subscribe(click);
+
+sub.fire('#event 1');
+
+sub.unsubscribe(click);
+
+sub.fire('#event 2');
+
+sub.subscribe(click);
+sub.subscribe(move);
+
+sub.fire('#event 3');
