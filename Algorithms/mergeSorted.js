@@ -1,4 +1,4 @@
-/** Q. Given 2 arrays in ascending order, return sorted array.
+/** Q. Given 2 arrays in ascending order, return sorted array.  
  */
  function merge(nums1, m, nums2, n) {
     let i = 0, j = 0, index = 0;

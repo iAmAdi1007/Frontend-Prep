@@ -2,23 +2,24 @@
  * Observer Desing Pattern also know as Pub/Sub Design Pattern 
  * Based on Event Driven Programming, as the name suggests, if you are subscribed to a Publisher and if anything is published, the publisher will notify the subscriber
  */
+type EventHandlerFn = (...args: string[]) => void
 
 const Publisher = function() {
     this.handlers = [];
 
     // Subscriber can subscribe to a function
-    this.subscribe = function(fn){
+    this.subscribe = function(fn: EventHandlerFn){
         this.handlers.push(fn);
     }
 
     // Subscriber can unsubscribe to the function
-    this.unsubscribe = function(fn){
-        this.handlers = this.handlers.filter(el => el !== fn);
+    this.unsubscribe = function(fn: EventHandlerFn){
+        this.handlers = this.handlers.filter((el: EventHandlerFn) => el !== fn);
     }
 
-    this.fire = function(event, thisObj){
+    this.fire = function(event:string, thisObj: Object){
         const thisContext = thisObj ||  global;
-        this.handlers.forEach(handler => {
+        this.handlers.forEach((handler: EventHandlerFn) => {
             handler.call(thisContext, event);
         })
     }
@@ -50,21 +51,22 @@ subscriber.fire('#event 3');
 
 console.log("*********************** ES6 Class Implementation ****************")
 
+
 class ObserverClass{
-    #handlers = null;
+    #handlers: EventHandlerFn[];
     constructor(){
         this.#handlers = []
     }
 
-    subscribe(fn){
+    subscribe(fn: EventHandlerFn){
         this.#handlers.push(fn)
     }
 
-    unsubscribe(fn){
+    unsubscribe(fn: EventHandlerFn){
         this.#handlers = this.#handlers.filter(el => el !== fn);
     }
 
-    fire(event){
+    fire(event: string){
         this.#handlers.forEach(handler => {
             handler(event);
         })
