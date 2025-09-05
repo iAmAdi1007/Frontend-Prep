@@ -8,6 +8,7 @@ class MyPromise {
   state = PROMISE_STATES.PENDING;
   sucessCallbacks = [];
   rejectedCallbacks = [];
+  finallyCallback = null;
   value = undefined;
   reason = undefined;
   constructor(executorFn) {
@@ -21,6 +22,9 @@ class MyPromise {
     this.value = value;
     console.log('Running callbacks:', this.sucessCallbacks);
     this.sucessCallbacks.forEach((cb) => cb(value));
+    if(this.finally){
+      this.finally();
+    }
   }
 
   reject(reason) {
@@ -28,16 +32,35 @@ class MyPromise {
     this.state = PROMISE_STATES.REJECTED;
     this.reason = reason;
     this.rejectedCallbacks.forEach((cb) => cb(reason));
+    if(this.finally){
+      this.finally();
+    }
   }
 
   then(handlerFn) {
-    this.sucessCallbacks.push(handlerFn);
+    if(this.state === PROMISE_STATES.REJECTED){
+      handlerFn(this.reason);
+    }else{
+      this.sucessCallbacks.push(handlerFn);
+    }
     return this;
   }
 
   catch(handlerFn) {
-    this.rejectedCallbacks.push(handlerFn);
+    if(this.state === PROMISE_STATES.REJECTED){
+      handlerFn(this.reason);
+    }else{
+      this.rejectedCallbacks.push(handlerFn);
+    }
     return this;
+  }
+
+  finally(handlerFn){
+    if(this.state !== PROMISE_STATES.PENDING){
+      return handlerFn()
+    }else{
+      this.finallyCallback = handlerFn;
+    }
   }
 }
 

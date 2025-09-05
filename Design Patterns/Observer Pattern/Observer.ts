@@ -26,11 +26,11 @@ const Publisher = function() {
 }
 
 
-const click = (item) => {
+const click = (item:unknown) => {
     console.log(`Clicked item ${item}`)
 }
 
-const move = (item) => {
+const move = (item:unknown) => {
     console.log(`Moved item ${item}`)
 }
 
@@ -53,21 +53,21 @@ console.log("*********************** ES6 Class Implementation ****************")
 
 
 class ObserverClass{
-    #handlers: EventHandlerFn[];
+    private handlers: EventHandlerFn[];
     constructor(){
-        this.#handlers = []
+        this.handlers = []
     }
 
     subscribe(fn: EventHandlerFn){
-        this.#handlers.push(fn)
+        this.handlers.push(fn)
     }
 
     unsubscribe(fn: EventHandlerFn){
-        this.#handlers = this.#handlers.filter(el => el !== fn);
+        this.handlers = this.handlers.filter(el => el !== fn);
     }
 
     fire(event: string){
-        this.#handlers.forEach(handler => {
+        this.handlers.forEach(handler => {
             handler(event);
         })
     }

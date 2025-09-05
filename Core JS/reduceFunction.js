@@ -66,3 +66,38 @@ asyncTaskArray.reduce((prev, curr) => {
         return curr.then(console.log)
     })
 }, Promise.resolve())
+
+
+Array.prototype.myReduce = function(callback, initialValue){
+
+    if(typeof callback !== 'function'){
+        throw new Error('First Parameter of Reduce should be a callback!!');
+    }
+    let acc = null;
+    let startValue = initialValue !== undefined ? 0 : 1;
+    if(!initialValue){
+        acc = this[0]
+    }else{
+        acc = initialValue;
+    }
+    
+    for(let i = startValue; i < this.length; i++){
+        acc = callback(acc, this[i]);
+    }
+
+    return acc;
+} 
+
+const testArr = [1, 2, 3];
+
+const original = testArr.reduce((acc, curr) => {
+    console.log(curr);
+    return acc + curr
+})
+
+const custom = testArr.myReduce((acc, curr) => {
+    console.log(curr);
+    return acc + curr
+})
+
+console.log(`Custom ${custom} vs. Original ${original}`)
